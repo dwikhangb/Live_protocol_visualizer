@@ -1,0 +1,586 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Network Protocol Visualizer</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+</head>
+
+<body>
+
+<div class="app-container">
+
+    <!-- =====================================================
+         TOP HEADER
+         ===================================================== -->
+
+    <header class="top-header">
+
+        <div class="brand-area">
+
+            
+
+            <div>
+                <h1>Network Protocol Visualizer</h1>
+
+                <p>
+                    From your action to the protocol
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="simulation-status" id="simulationStatus">
+
+            <span class="status-dot"></span>
+
+            <span id="statusText">
+                Simulation Ready
+            </span>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         MAIN DASHBOARD
+         EXACTLY TWO PANELS
+         ===================================================== -->
+
+    <main class="dashboard">
+
+
+        <!-- =================================================
+             LEFT PANEL - ACTIVITY CONTROLS
+             ================================================= -->
+
+        <section class="activity-panel">
+
+            <div class="panel-heading">
+
+                <div class="panel-number">
+                    01
+                </div>
+
+                <div>
+                    <h2>Activity Controls</h2>
+
+                    <p>
+                        Choose an activity to begin
+                    </p>
+                </div>
+
+            </div>
+
+
+            <!-- =============================================
+                 ACTIVITY TABS
+                 ============================================= -->
+
+            <div class="activity-tabs">
+
+                <button
+                    class="activity-tab active"
+                    data-activity="browsing"
+                    type="button"
+                >
+                    <span class="tab-icon">◉</span>
+                    Browsing
+                </button>
+
+
+                <button
+                    class="activity-tab"
+                    data-activity="mail"
+                    type="button"
+                >
+                    <span class="tab-icon">✉</span>
+                    Mail
+                </button>
+
+
+                <button
+                    class="activity-tab"
+                    data-activity="streaming"
+                    type="button"
+                >
+                    <span class="tab-icon">▶</span>
+                    Streaming
+                </button>
+
+            </div>
+
+
+            <!-- =============================================
+                 ACTIVITY CONTENT
+                 ============================================= -->
+
+            <div class="activity-content">
+
+
+                <!-- =========================================
+                     BROWSING
+                     ========================================= -->
+
+                <div
+                    class="activity-form active"
+                    id="browsingForm"
+                >
+
+                    <label for="websiteUrl">
+                        Website URL
+                    </label>
+
+
+                    <div class="input-action-row">
+
+                        <input
+                            type="url"
+                            id="websiteUrl"
+                            placeholder="https://www.youtube.com"
+                        
+                        >
+
+
+                        <button
+                            class="primary-button"
+                            id="visitButton"
+                            type="button"
+                        >
+                            Visit
+                            <span>↗</span>
+                        </button>
+
+                    </div>
+
+
+                    <p class="form-description">
+                        Simulates DNS lookup and HTTP communication.
+                    </p>
+
+                </div>
+
+
+                <!-- =========================================
+                     MAIL
+                     ========================================= -->
+
+                <div
+                    class="activity-form"
+                    id="mailForm"
+                >
+
+                    <div class="form-group">
+
+                        <label for="mailTo">
+                            To
+                        </label>
+
+                        <input
+                            type="email"
+                            id="mailTo"
+                            placeholder="receiver@example.com"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="mailSubject">
+                            Subject
+                        </label>
+
+                        <input
+                            type="text"
+                            id="mailSubject"
+                            placeholder="Enter email subject"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="mailBody">
+                            Message
+                        </label>
+
+                        <textarea
+                            id="mailBody"
+                            rows="5"
+                            placeholder="Write your message..."
+                        ></textarea>
+
+                    </div>
+
+
+                    <button
+                        class="primary-button full-button"
+                        id="sendMailButton"
+                        type="button"
+                    >
+                        Send Mail
+                        <span>➤</span>
+                    </button>
+
+
+                    <p class="form-description">
+                        Simulates SMTP communication between the mail client and server.
+                    </p>
+
+                </div>
+
+
+                <!-- =========================================
+                     STREAMING
+                     ========================================= -->
+
+                <div
+                    class="activity-form"
+                    id="streamingForm"
+                >
+
+                    <label>
+                        Streaming Quality
+                    </label>
+
+
+                    <div class="quality-options">
+
+                        <button
+                            class="quality-button"
+                            data-quality="360p"
+                            type="button"
+                        >
+                            360p
+                        </button>
+
+
+                        <button
+                            class="quality-button active"
+                            data-quality="720p"
+                            type="button"
+                        >
+                            720p
+                        </button>
+
+
+                        <button
+                            class="quality-button"
+                            data-quality="1080p"
+                            type="button"
+                        >
+                            1080p
+                        </button>
+
+                    </div>
+
+
+                    <div class="stream-actions">
+
+                        <button
+                            class="primary-button"
+                            id="playButton"
+                            type="button"
+                        >
+                            <span>▶</span>
+                            Play
+                        </button>
+
+
+                        <button
+                            class="secondary-button"
+                            id="pauseButton"
+                            type="button"
+                            disabled
+                        >
+                            <span>Ⅱ</span>
+                            Pause
+                        </button>
+
+                    </div>
+
+
+                    <p class="form-description">
+                        Simulates DNS, HTTP and HLS streaming communication.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- =============================================
+                 LIVE ACTIVITY LOG
+                 ============================================= -->
+
+            <div class="activity-log-section">
+
+                <div class="section-title-row">
+
+                    <h3>
+                        Live Activity Log
+                    </h3>
+
+                    <span class="live-indicator">
+                        <span></span>
+                        LIVE
+                    </span>
+
+                </div>
+
+
+                <div
+                    class="activity-log"
+                    id="activityLog"
+                >
+
+                    <div class="log-empty">
+                        No activity yet.
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             RIGHT PANEL - PROTOCOL VISUALIZATION
+             ================================================= -->
+
+        <section class="protocol-panel">
+
+
+            <!-- =============================================
+                 PROTOCOL HEADER
+                 ============================================= -->
+
+            <div class="panel-heading protocol-heading">
+
+                <div class="panel-number">
+                    02
+                </div>
+
+                <div>
+
+                    <h2>Protocol Flow</h2>
+
+                    <p>
+                        Watch the messages exchanged
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- =============================================
+                 PROTOCOL FILTERS
+                 ============================================= -->
+
+            <div class="protocol-toolbar">
+
+                <div class="protocol-filters">
+
+                    <button
+                        class="protocol-filter active"
+                        data-filter="ALL"
+                        type="button"
+                    >
+                        All
+                    </button>
+
+
+                    <button
+                        class="protocol-filter"
+                        data-filter="DNS"
+                        type="button"
+                    >
+                        DNS
+                    </button>
+
+
+                    <button
+                        class="protocol-filter"
+                        data-filter="HTTP"
+                        type="button"
+                    >
+                        HTTP
+                    </button>
+
+
+                    <button
+                        class="protocol-filter"
+                        data-filter="SMTP"
+                        type="button"
+                    >
+                        SMTP
+                    </button>
+
+                </div>
+
+
+                <div
+                    class="step-counter"
+                    id="stepCounter"
+                >
+                    Step 0 / 0
+                </div>
+
+            </div>
+
+
+            <!-- =============================================
+                 CLIENT / SERVER LABELS
+                 ============================================= -->
+
+            <div class="protocol-labels">
+
+                <span>
+                    CLIENT
+                </span>
+
+                <span>
+                    SERVER
+                </span>
+
+            </div>
+
+
+            <!-- =============================================
+                 SCROLLABLE PROTOCOL FLOW
+                 IMPORTANT:
+                 ONLY THIS SECTION SCROLLS
+                 ============================================= -->
+
+            <div
+                class="protocol-flow"
+                id="protocolFlow"
+            >
+
+                <!-- Initial Empty State -->
+
+                <div
+                    class="protocol-empty"
+                    id="protocolEmpty"
+                >
+
+                    <div class="protocol-empty-icon">
+                        ⇄
+                    </div>
+
+                    <h3>
+                        Ready to explore?
+                    </h3>
+
+                    <p>
+                        Start an activity to visualize<br>
+                        the protocol communication.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- =============================================
+                 PROTOCOL PLAYBACK CONTROLS
+                 ============================================= -->
+
+            <div class="playback-controls">
+
+                <button
+                    class="playback-button"
+                    id="previousButton"
+                    type="button"
+                    disabled
+                    title="Previous message"
+                >
+                    ◀
+                </button>
+
+
+                <button
+                    class="playback-main-button"
+                    id="playbackButton"
+                    type="button"
+                    disabled
+                >
+                    ▶
+                </button>
+
+
+                <button
+                    class="playback-button"
+                    id="nextButton"
+                    type="button"
+                    disabled
+                    title="Next message"
+                >
+                    ▶
+                </button>
+
+
+                <button
+                    class="playback-button replay-button"
+                    id="replayButton"
+                    type="button"
+                    disabled
+                    title="Replay protocol"
+                >
+                    ↻
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         FOOTER
+         ===================================================== -->
+
+    <footer class="app-footer">
+
+        <span>
+            Protocol Simulation Dashboard
+        </span>
+
+        <span>
+            DNS · HTTP · SMTP · HLS
+        </span>
+
+    </footer>
+
+</div>
+
+
+<!-- =========================================================
+     JAVASCRIPT
+     ========================================================= -->
+
+<script
+    src="{{ url_for('static', filename='script.js') }}"
+></script>
+
+</body>
+</html>
+

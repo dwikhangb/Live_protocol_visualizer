@@ -1,0 +1,1733 @@
+/* =========================================================
+   NETWORK PROTOCOL VISUALIZER
+   COMPLETE CORRECTED STYLE SHEET
+   ========================================================= */
+
+
+/* =========================================================
+   1. RESET
+   ========================================================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+html {
+    overflow: hidden;
+}
+
+body {
+    min-height: 100vh;
+    overflow: hidden;
+
+    font-family:
+        Inter,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    color: #f4f5ff;
+
+    background:
+        radial-gradient(
+            circle at 10% 10%,
+            rgba(102, 82, 255, 0.16),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 90% 85%,
+            rgba(0, 190, 255, 0.10),
+            transparent 30%
+        ),
+        linear-gradient(
+            135deg,
+            #08091c 0%,
+            #0c0d25 45%,
+            #090a19 100%
+        );
+}
+
+
+/* =========================================================
+   2. MAIN APPLICATION
+   ========================================================= */
+
+.app-container {
+    width: 100%;
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 18px 24px 12px;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   3. TOP HEADER
+   ========================================================= */
+
+.top-header {
+    flex: 0 0 auto;
+
+    min-height: 58px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 16px;
+}
+
+.brand-area {
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+}
+
+.brand-icon {
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 15px;
+
+    font-size: 25px;
+    font-weight: 700;
+
+    color: white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #8065ff,
+            #34bde9
+        );
+
+    box-shadow:
+        0 8px 25px rgba(75, 110, 255, 0.28);
+
+    animation: brandGlow 3s ease-in-out infinite;
+}
+
+@keyframes brandGlow {
+
+    0%,
+    100% {
+        box-shadow:
+            0 8px 25px rgba(75, 110, 255, 0.25);
+    }
+
+    50% {
+        box-shadow:
+            0 8px 35px rgba(75, 110, 255, 0.45);
+    }
+}
+
+.brand-area h1 {
+    font-size: 25px;
+    font-weight: 750;
+
+    letter-spacing: -0.5px;
+
+    color: #f5f5ff;
+}
+
+.brand-area p {
+    margin-top: 3px;
+
+    font-size: 12px;
+
+    color: rgba(190, 193, 225, 0.62);
+}
+
+
+/* =========================================================
+   4. SIMULATION STATUS
+   ========================================================= */
+
+.simulation-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 9px 14px;
+
+    border: 1px solid rgba(74, 215, 190, 0.20);
+
+    border-radius: 22px;
+
+    background:
+        rgba(50, 180, 160, 0.06);
+
+    color: #61e5c6;
+
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.status-dot {
+    width: 7px;
+    height: 7px;
+
+    flex: 0 0 7px;
+
+    border-radius: 50%;
+
+    background: #61e5c6;
+
+    box-shadow:
+        0 0 10px rgba(97, 229, 198, 0.8);
+
+    animation: statusPulse 1.8s infinite;
+}
+
+@keyframes statusPulse {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.45;
+        transform: scale(0.75);
+    }
+}
+
+
+/* =========================================================
+   5. MAIN DASHBOARD
+   ========================================================= */
+
+.dashboard {
+    flex: 1 1 auto;
+
+    min-height: 0;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(360px, 0.88fr)
+        minmax(520px, 1.12fr);
+
+    gap: 22px;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   6. GLASS PANELS
+   ========================================================= */
+
+.activity-panel,
+.protocol-panel {
+    min-height: 0;
+
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+
+    overflow: hidden;
+
+    border: 1px solid rgba(132, 139, 220, 0.18);
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(25, 27, 55, 0.78),
+            rgba(12, 14, 34, 0.72)
+        );
+
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.035);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+
+/* =========================================================
+   7. PANEL HEADING
+   ========================================================= */
+
+.panel-heading {
+    flex: 0 0 auto;
+
+    display: flex;
+    align-items: center;
+
+    gap: 13px;
+
+    padding: 26px 24px 20px;
+}
+
+.panel-number {
+    width: 38px;
+    height: 38px;
+
+    flex: 0 0 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    color: #a99aff;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(129, 102, 255, 0.17),
+            rgba(72, 112, 255, 0.06)
+        );
+
+    border: 1px solid rgba(128, 105, 255, 0.30);
+}
+
+.panel-heading h2 {
+    font-size: 17px;
+    font-weight: 720;
+
+    letter-spacing: -0.2px;
+}
+
+.panel-heading p {
+    margin-top: 4px;
+
+    font-size: 11px;
+
+    color: rgba(185, 188, 220, 0.56);
+}
+
+
+/* =========================================================
+   8. ACTIVITY TABS
+   ========================================================= */
+
+.activity-tabs {
+    flex: 0 0 auto;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 4px;
+
+    margin: 0 24px 20px;
+
+    padding: 4px;
+
+    border: 1px solid rgba(126, 132, 202, 0.16);
+
+    border-radius: 14px;
+
+    background:
+        rgba(7, 9, 25, 0.45);
+}
+
+.activity-tab {
+    height: 42px;
+
+    border: 0;
+
+    border-radius: 10px;
+
+    background: transparent;
+
+    color: rgba(191, 194, 220, 0.62);
+
+    font-size: 12px;
+    font-weight: 650;
+
+    cursor: pointer;
+
+    transition:
+        color 0.25s ease,
+        background 0.25s ease,
+        transform 0.2s ease;
+}
+
+.activity-tab:hover {
+    color: #e7e8ff;
+
+    background:
+        rgba(255, 255, 255, 0.04);
+}
+
+.activity-tab.active {
+    color: #ffffff;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(124, 101, 255, 0.24),
+            rgba(68, 123, 255, 0.12)
+        );
+
+    border: 1px solid rgba(124, 112, 255, 0.28);
+
+    box-shadow:
+        0 4px 16px rgba(75, 78, 180, 0.12);
+}
+
+.tab-icon {
+    margin-right: 7px;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   9. ACTIVITY CONTENT
+   ========================================================= */
+
+.activity-content {
+    flex: 0 0 auto;
+
+    padding: 0 24px;
+}
+
+.activity-form {
+    display: none;
+
+    animation: formAppear 0.3s ease;
+}
+
+.activity-form.active {
+    display: block;
+}
+
+@keyframes formAppear {
+
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* =========================================================
+   10. FORM ELEMENTS
+   ========================================================= */
+
+label {
+    display: block;
+
+    margin-bottom: 9px;
+
+    color: rgba(222, 224, 244, 0.76);
+
+    font-size: 11px;
+    font-weight: 650;
+}
+
+.input-action-row {
+    display: grid;
+
+    grid-template-columns: 1fr auto;
+
+    gap: 9px;
+}
+
+input,
+textarea {
+    width: 100%;
+
+    border: 1px solid rgba(120, 127, 196, 0.18);
+
+    border-radius: 11px;
+
+    outline: none;
+
+    background:
+        rgba(5, 7, 23, 0.62);
+
+    color: #f4f5ff;
+
+    font-family: inherit;
+
+    font-size: 12px;
+
+    transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        background 0.25s ease;
+}
+
+input {
+    height: 47px;
+
+    padding: 0 14px;
+}
+
+textarea {
+    padding: 12px 14px;
+
+    resize: none;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: rgba(176, 179, 207, 0.40);
+}
+
+input:focus,
+textarea:focus {
+    border-color:
+        rgba(125, 109, 255, 0.65);
+
+    background:
+        rgba(8, 10, 30, 0.82);
+
+    box-shadow:
+        0 0 0 3px rgba(125, 109, 255, 0.08);
+}
+
+.form-group {
+    margin-bottom: 14px;
+}
+
+.form-description {
+    margin-top: 10px;
+
+    color: rgba(174, 177, 208, 0.48);
+
+    font-size: 10px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   11. BUTTONS
+   ========================================================= */
+
+.primary-button,
+.secondary-button {
+    min-height: 44px;
+
+    padding: 0 17px;
+
+    border-radius: 11px;
+
+    font-family: inherit;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        opacity 0.2s ease,
+        background 0.2s ease;
+}
+
+.primary-button {
+    border: 1px solid rgba(134, 115, 255, 0.45);
+
+    color: white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #7761f6,
+            #5e8df9
+        );
+
+    box-shadow:
+        0 8px 20px rgba(93, 87, 240, 0.22);
+}
+
+.primary-button:hover:not(:disabled) {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 11px 26px rgba(93, 87, 240, 0.34);
+}
+
+.primary-button:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.secondary-button {
+    border: 1px solid rgba(120, 127, 190, 0.20);
+
+    color: rgba(222, 225, 245, 0.72);
+
+    background:
+        rgba(255, 255, 255, 0.045);
+}
+
+.secondary-button:hover:not(:disabled) {
+    background:
+        rgba(255, 255, 255, 0.08);
+}
+
+button:disabled {
+    opacity: 0.35;
+
+    cursor: not-allowed;
+}
+
+.full-button {
+    width: 100%;
+}
+
+
+/* =========================================================
+   12. MAIL TEXTAREA
+   ========================================================= */
+
+#mailForm textarea {
+    min-height: 105px;
+}
+
+
+/* =========================================================
+   13. STREAMING QUALITY
+   ========================================================= */
+
+.quality-options {
+    display: flex;
+
+    gap: 8px;
+
+    margin-bottom: 16px;
+}
+
+.quality-button {
+    flex: 1;
+
+    height: 40px;
+
+    border-radius: 10px;
+
+    border: 1px solid rgba(125, 130, 195, 0.18);
+
+    color: rgba(196, 199, 224, 0.62);
+
+    background:
+        rgba(255, 255, 255, 0.035);
+
+    font-size: 11px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        0.22s ease;
+}
+
+.quality-button:hover {
+    background:
+        rgba(255, 255, 255, 0.07);
+
+    color: #ffffff;
+}
+
+.quality-button.active {
+    color: #ffffff;
+
+    border-color:
+        rgba(113, 121, 255, 0.48);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(113, 95, 255, 0.24),
+            rgba(73, 122, 255, 0.13)
+        );
+}
+
+.stream-actions {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 9px;
+}
+
+
+/* =========================================================
+   14. ACTIVITY LOG
+   ========================================================= */
+
+.activity-log-section {
+    min-height: 0;
+
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+
+    margin: 25px 24px 20px;
+
+    padding-top: 19px;
+
+    border-top: 1px solid rgba(130, 135, 190, 0.13);
+}
+
+.section-title-row {
+    flex: 0 0 auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 11px;
+}
+
+.section-title-row h3 {
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.live-indicator {
+    display: flex;
+    align-items: center;
+
+    gap: 5px;
+
+    color: #61dfc0;
+
+    font-size: 9px;
+    font-weight: 700;
+
+    letter-spacing: 0.5px;
+}
+
+.live-indicator span {
+    width: 5px;
+    height: 5px;
+
+    border-radius: 50%;
+
+    background: #61dfc0;
+
+    box-shadow:
+        0 0 8px rgba(97, 223, 192, 0.75);
+}
+
+.activity-log {
+    min-height: 0;
+
+    flex: 1;
+
+    overflow-y: auto;
+
+    padding-right: 4px;
+}
+
+.activity-log::-webkit-scrollbar {
+    width: 5px;
+}
+
+.activity-log::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.activity-log::-webkit-scrollbar-thumb {
+    background: rgba(130, 130, 190, 0.25);
+
+    border-radius: 10px;
+}
+
+.log-item {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    min-height: 40px;
+
+    margin-bottom: 7px;
+
+    padding: 9px 11px;
+
+    border: 1px solid rgba(124, 129, 190, 0.10);
+
+    border-radius: 9px;
+
+    background:
+        rgba(255, 255, 255, 0.025);
+
+    animation: logAppear 0.3s ease;
+}
+
+@keyframes logAppear {
+
+    from {
+        opacity: 0;
+        transform: translateX(-8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.log-time {
+    color: #5dd9f2;
+
+    font-size: 9px;
+
+    white-space: nowrap;
+}
+
+.log-message {
+    color: rgba(216, 219, 238, 0.73);
+
+    font-size: 10px;
+}
+
+.log-empty {
+    padding: 20px 5px;
+
+    color: rgba(180, 183, 210, 0.38);
+
+    text-align: center;
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   15. PROTOCOL PANEL
+   ========================================================= */
+
+.protocol-panel {
+    padding-bottom: 13px;
+}
+
+
+/* =========================================================
+   16. PROTOCOL TOOLBAR
+   ========================================================= */
+
+.protocol-toolbar {
+    flex: 0 0 auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 24px 12px;
+}
+
+.protocol-filters {
+    display: flex;
+
+    gap: 6px;
+}
+
+.protocol-filter {
+    height: 34px;
+
+    padding: 0 13px;
+
+    border-radius: 18px;
+
+    border: 1px solid rgba(126, 131, 191, 0.18);
+
+    background:
+        rgba(255, 255, 255, 0.025);
+
+    color: rgba(184, 188, 218, 0.60);
+
+    font-family: inherit;
+
+    font-size: 10px;
+    font-weight: 650;
+
+    cursor: pointer;
+
+    transition:
+        0.22s ease;
+}
+
+.protocol-filter:hover {
+    color: #ffffff;
+
+    background:
+        rgba(255, 255, 255, 0.06);
+}
+
+.protocol-filter.active {
+    color: #62e2f4;
+
+    border-color:
+        rgba(55, 209, 240, 0.42);
+
+    background:
+        rgba(38, 190, 225, 0.08);
+
+    box-shadow:
+        0 0 14px rgba(30, 192, 220, 0.08);
+}
+
+.step-counter {
+    color: rgba(184, 188, 216, 0.62);
+
+    font-size: 10px;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   17. CLIENT / SERVER LABELS
+   ========================================================= */
+
+.protocol-labels {
+    flex: 0 0 auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 7px 28px 9px;
+
+    color: rgba(170, 174, 205, 0.48);
+
+    font-size: 8px;
+    font-weight: 750;
+
+    letter-spacing: 1.4px;
+}
+
+
+/* =========================================================
+   18. PROTOCOL FLOW
+   ONLY THIS AREA SCROLLS ON DESKTOP
+   ========================================================= */
+
+.protocol-flow {
+    flex: 1 1 auto;
+
+    min-height: 0;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    padding:
+        4px 15px 18px 24px;
+
+    scroll-behavior: smooth;
+
+    overscroll-behavior: contain;
+
+    scrollbar-width: thin;
+
+    scrollbar-color:
+        rgba(118, 108, 230, 0.55)
+        rgba(255, 255, 255, 0.025);
+}
+
+
+/* Chrome / Edge scrollbar */
+
+.protocol-flow::-webkit-scrollbar {
+    width: 7px;
+}
+
+.protocol-flow::-webkit-scrollbar-track {
+    margin: 5px 0;
+
+    background:
+        rgba(255, 255, 255, 0.025);
+
+    border-radius: 10px;
+}
+
+.protocol-flow::-webkit-scrollbar-thumb {
+    background:
+        linear-gradient(
+            180deg,
+            rgba(117, 100, 240, 0.65),
+            rgba(58, 184, 226, 0.55)
+        );
+
+    border-radius: 10px;
+}
+
+.protocol-flow::-webkit-scrollbar-thumb:hover {
+    background:
+        linear-gradient(
+            180deg,
+            rgba(135, 118, 255, 0.85),
+            rgba(67, 204, 242, 0.75)
+        );
+}
+
+
+/* =========================================================
+   19. EMPTY PROTOCOL STATE
+   ========================================================= */
+
+.protocol-empty {
+    min-height: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 40px;
+
+    text-align: center;
+
+    color: rgba(186, 190, 218, 0.50);
+}
+
+.protocol-empty-icon {
+    margin-bottom: 14px;
+
+    font-size: 42px;
+
+    color: rgba(125, 111, 255, 0.55);
+
+    animation:
+        emptyFloat 2.8s ease-in-out infinite;
+}
+
+@keyframes emptyFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+.protocol-empty h3 {
+    margin-bottom: 7px;
+
+    color: rgba(235, 236, 250, 0.75);
+
+    font-size: 14px;
+}
+
+.protocol-empty p {
+    font-size: 10px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   20. PROTOCOL EVENT CARD
+   ========================================================= */
+
+.protocol-event {
+    position: relative;
+
+    margin-bottom: 13px;
+
+    padding: 15px;
+
+    border-radius: 15px;
+
+    border: 1px solid rgba(132, 138, 202, 0.16);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(35, 38, 72, 0.58),
+            rgba(12, 15, 35, 0.58)
+        );
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.14),
+        inset 0 1px 0 rgba(255, 255, 255, 0.025);
+
+    opacity: 0;
+
+    transform:
+        translateY(24px)
+        scale(0.97);
+
+    animation:
+        protocolMessageIn
+        0.55s
+        cubic-bezier(.2, .8, .2, 1)
+        forwards;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   21. PROTOCOL MESSAGE ANIMATION
+   ========================================================= */
+
+@keyframes protocolMessageIn {
+
+    0% {
+        opacity: 0;
+
+        transform:
+            translateY(24px)
+            scale(0.97);
+
+        filter: blur(5px);
+    }
+
+    60% {
+        opacity: 1;
+
+        transform:
+            translateY(-3px)
+            scale(1.005);
+
+        filter: blur(0);
+    }
+
+    100% {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+
+        filter: blur(0);
+    }
+}
+
+
+/* =========================================================
+   22. ACTIVE PROTOCOL CARD
+   ========================================================= */
+
+.protocol-event.active {
+    border-color:
+        rgba(76, 211, 244, 0.38);
+
+    box-shadow:
+        0 0 0 1px rgba(76, 211, 244, 0.05),
+        0 0 28px rgba(76, 191, 242, 0.10),
+        0 12px 30px rgba(0, 0, 0, 0.20);
+}
+
+.protocol-event.active::before {
+    content: "";
+
+    position: absolute;
+
+    top: 13px;
+    bottom: 13px;
+    left: 0;
+
+    width: 3px;
+
+    border-radius: 0 5px 5px 0;
+
+    background:
+        linear-gradient(
+            180deg,
+            #4de6ff,
+            #856cff
+        );
+
+    animation:
+        activeLineGlow
+        1.3s
+        ease-in-out
+        infinite alternate;
+}
+
+@keyframes activeLineGlow {
+
+    from {
+        opacity: 0.45;
+
+        box-shadow:
+            0 0 4px rgba(65, 220, 255, 0.25);
+    }
+
+    to {
+        opacity: 1;
+
+        box-shadow:
+            0 0 15px rgba(65, 220, 255, 0.75);
+    }
+}
+
+
+/* =========================================================
+   23. NEW MESSAGE PULSE
+   ========================================================= */
+
+.protocol-event.just-arrived {
+    animation:
+        protocolMessageIn
+        0.55s
+        cubic-bezier(.2, .8, .2, 1)
+        forwards,
+        messagePulse
+        1.2s
+        ease-out
+        0.55s;
+}
+
+@keyframes messagePulse {
+
+    0% {
+        box-shadow:
+            0 0 0 0
+            rgba(85, 215, 255, 0.35);
+    }
+
+    100% {
+        box-shadow:
+            0 0 0 18px
+            rgba(85, 215, 255, 0);
+    }
+}
+
+
+/* =========================================================
+   24. PROTOCOL EVENT HEADER
+   ========================================================= */
+
+.protocol-event-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 12px;
+
+    margin-bottom: 11px;
+}
+
+.protocol-event-title {
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+}
+
+.protocol-event-title strong {
+    color: #e9ebfa;
+
+    font-size: 12px;
+    font-weight: 720;
+}
+
+.protocol-step {
+    color: rgba(180, 184, 214, 0.48);
+
+    font-size: 9px;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   25. PROTOCOL BADGE
+   ========================================================= */
+
+.protocol-badge {
+    min-width: 39px;
+    height: 22px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 7px;
+
+    border-radius: 6px;
+
+    color: #61e1c7;
+
+    background:
+        rgba(57, 207, 181, 0.10);
+
+    border: 1px solid
+        rgba(57, 207, 181, 0.18);
+
+    font-size: 8px;
+    font-weight: 800;
+
+    letter-spacing: 0.4px;
+}
+
+
+/* DNS */
+
+.protocol-event.dns .protocol-badge {
+    color: #5fe5d0;
+
+    background:
+        rgba(59, 217, 193, 0.10);
+
+    border-color:
+        rgba(59, 217, 193, 0.20);
+}
+
+
+/* HTTP */
+
+.protocol-event.http .protocol-badge {
+    color: #6eb5ff;
+
+    background:
+        rgba(82, 150, 255, 0.10);
+
+    border-color:
+        rgba(82, 150, 255, 0.20);
+}
+
+
+/* SMTP */
+
+.protocol-event.smtp .protocol-badge {
+    color: #d197ff;
+
+    background:
+        rgba(178, 102, 255, 0.10);
+
+    border-color:
+        rgba(178, 102, 255, 0.20);
+}
+
+
+/* =========================================================
+   26. DIRECTION
+   ========================================================= */
+
+.protocol-direction {
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+
+    margin: 7px 0 10px;
+
+    color: rgba(169, 174, 205, 0.46);
+
+    font-size: 8px;
+    font-weight: 750;
+
+    letter-spacing: 1px;
+}
+
+.protocol-direction-line {
+    position: relative;
+
+    flex: 1;
+
+    height: 1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,0.03),
+            rgba(108, 145, 220, 0.34),
+            rgba(255,255,255,0.03)
+        );
+}
+
+
+/* Client → Server */
+
+.protocol-direction-line::after {
+    content: "→";
+
+    position: absolute;
+
+    right: 1px;
+    top: 50%;
+
+    transform:
+        translateY(-53%);
+
+    color: #66d9f4;
+
+    font-size: 13px;
+}
+
+
+/* Server → Client */
+/* CORRECTED SELECTOR */
+
+.protocol-event.server-to-client .protocol-direction-line::after {
+    content: "←";
+
+    right: auto;
+    left: 1px;
+}
+
+
+/* =========================================================
+   27. PROTOCOL MESSAGE
+   ========================================================= */
+
+.protocol-message {
+    padding: 12px 13px;
+
+    border-radius: 9px;
+
+    border: 1px solid rgba(128, 135, 192, 0.10);
+
+    background:
+        rgba(5, 8, 24, 0.60);
+
+    color: rgba(231, 234, 250, 0.87);
+
+    font-family:
+        "Cascadia Code",
+        "Consolas",
+        "Courier New",
+        monospace;
+
+    font-size: 10px;
+
+    line-height: 1.65;
+
+    white-space: pre-wrap;
+
+    word-break: break-word;
+}
+
+
+/* =========================================================
+   28. PROTOCOL FIELDS
+   ========================================================= */
+
+.protocol-fields {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 6px;
+
+    margin-top: 9px;
+}
+
+.protocol-field {
+    padding: 4px 7px;
+
+    border-radius: 5px;
+
+    color: rgba(204, 208, 236, 0.70);
+
+    background:
+        rgba(115, 103, 240, 0.08);
+
+    border: 1px solid
+        rgba(115, 103, 240, 0.14);
+
+    font-size: 8px;
+}
+
+
+/* =========================================================
+   29. PLAYBACK CONTROLS
+   ========================================================= */
+
+.playback-controls {
+    flex: 0 0 auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    padding:
+        11px 24px 2px;
+
+    border-top:
+        1px solid rgba(128, 134, 190, 0.10);
+}
+
+.playback-button,
+.playback-main-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 9px;
+
+    cursor: pointer;
+
+    transition:
+        0.2s ease;
+}
+
+.playback-button {
+    width: 34px;
+    height: 34px;
+
+    border:
+        1px solid rgba(127, 132, 192, 0.16);
+
+    color:
+        rgba(207, 210, 234, 0.70);
+
+    background:
+        rgba(255, 255, 255, 0.035);
+}
+
+.playback-button:hover:not(:disabled) {
+    color: white;
+
+    background:
+        rgba(255, 255, 255, 0.08);
+
+    transform: translateY(-1px);
+}
+
+.playback-main-button {
+    width: 42px;
+    height: 42px;
+
+    border:
+        1px solid rgba(126, 110, 255, 0.42);
+
+    color: white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #7560f5,
+            #5d91fb
+        );
+
+    box-shadow:
+        0 7px 18px rgba(91, 83, 235, 0.22);
+}
+
+.playback-main-button:hover:not(:disabled) {
+    transform: scale(1.06);
+
+    box-shadow:
+        0 9px 25px rgba(91, 83, 235, 0.35);
+}
+
+.replay-button {
+    margin-left: 4px;
+}
+
+
+/* =========================================================
+   30. FOOTER
+   ========================================================= */
+
+.app-footer {
+    flex: 0 0 auto;
+
+    height: 25px;
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    padding: 5px 3px 0;
+
+    color: rgba(156, 160, 192, 0.35);
+
+    font-size: 8px;
+}
+
+
+/* =========================================================
+   31. DISABLED / LOADING STATE
+   ========================================================= */
+
+.loading {
+    pointer-events: none;
+
+    opacity: 0.65;
+}
+
+.loading::after {
+    content: "";
+
+    display: inline-block;
+
+    width: 8px;
+    height: 8px;
+
+    margin-left: 7px;
+
+    border: 2px solid rgba(255,255,255,0.25);
+
+    border-top-color: white;
+
+    border-radius: 50%;
+
+    animation:
+        loadingSpin
+        0.7s
+        linear
+        infinite;
+}
+
+@keyframes loadingSpin {
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* =========================================================
+   32. RESPONSIVE DESIGN
+   ========================================================= */
+
+@media (max-width: 1050px) {
+
+    .dashboard {
+        grid-template-columns:
+            minmax(320px, 0.85fr)
+            minmax(430px, 1.15fr);
+
+        gap: 14px;
+    }
+
+    .app-container {
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+}
+
+
+@media (max-width: 850px) {
+
+    /*
+       On smaller screens the browser page is allowed
+       to scroll because two panels cannot comfortably
+       fit side-by-side.
+    */
+
+    html {
+        overflow: auto;
+    }
+
+    body {
+        overflow: auto;
+    }
+
+    .app-container {
+        height: auto;
+        min-height: 100vh;
+
+        overflow: visible;
+    }
+
+    .top-header {
+        margin-bottom: 14px;
+    }
+
+    .dashboard {
+        height: auto;
+
+        display: flex;
+        flex-direction: column;
+
+        overflow: visible;
+    }
+
+    .activity-panel {
+        min-height: 650px;
+    }
+
+    .protocol-panel {
+        height: 700px;
+        min-height: 700px;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .app-container {
+        padding: 12px;
+    }
+
+    .brand-area h1 {
+        font-size: 20px;
+    }
+
+    .brand-icon {
+        width: 42px;
+        height: 42px;
+    }
+
+    .simulation-status {
+        padding: 7px 10px;
+    }
+
+    .protocol-toolbar {
+        padding-left: 17px;
+        padding-right: 17px;
+    }
+
+    .protocol-labels {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .protocol-flow {
+        padding-left: 17px;
+        padding-right: 10px;
+    }
+
+    .panel-heading {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+    .activity-tabs {
+        margin-left: 18px;
+        margin-right: 18px;
+    }
+
+    .activity-content {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+    .activity-log-section {
+        margin-left: 18px;
+        margin-right: 18px;
+    }
+}
